@@ -21,6 +21,7 @@ import com.google.zxing.PlanarYUVLuminanceSource;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
+import android.widget.Toast;
 
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private CameraManager mCameraManager;
@@ -45,7 +46,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     public void startCamera() {
         mCamera = mCameraManager.getCamera(mCameraType);
-        startCameraPreview();
+        if (mCamera == null) {
+            Toast.makeText(getContext(), "摄像头不可用，或用户拒绝授权使用", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            startCameraPreview();
+        }
     }
 
     public void stopCamera() {
