@@ -47,10 +47,16 @@ public class BarcodeScannerManager extends ViewGroupManager<BarcodeScannerView> 
         mScannerViewVisible = true;
         return mScannerView;
     }
-
+    @Override
+    public void onDropViewInstance(BarcodeScannerView view) {
+        mScannerViewVisible = false;
+        mScannerView.stopCamera();
+    }
     @Override
     public void onHostResume() {
-        mScannerView.onResume();
+      if (mScannerViewVisible) {
+            mScannerView.onResume();
+        }
     }
 
     @Override
