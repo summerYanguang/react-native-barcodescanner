@@ -26,7 +26,7 @@ import android.widget.Toast;
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private CameraManager mCameraManager;
     private Camera mCamera;
-    private String mCameraType;
+    private String mCameraType = "back";
     private Camera.PreviewCallback mPreviewCallback;
 
     private Handler mAutoFocusHandler;
@@ -60,6 +60,9 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void setCameraType(String cameraType) {
+        if(mCameraType == cameraType){
+            return;
+        }
         mCameraType = cameraType;
         stopCamera();
         startCamera();
